@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Appointment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+        <span class="navbar-brand">🏥 Smart Hospital Queue System</span>
+    </div>
+</nav>
+
+<div class="container mt-5">
+
+    <div class="card shadow col-md-6 mx-auto">
+        <div class="card-body">
+            <h3 class="text-center mb-4">📅 Book Appointment</h3>
+
+{% if token_number %}
+<div class="alert alert-success text-center fs-4 fw-bold mt-3">
+    🎉 Appointment Confirmed! <br>
+    Your Token Number is: <strong>{{ token_number }}</strong>
+</div>
+{% endif %}    
+            <form method="POST">
+
+                <div class="mb-3">
+                    <label class="form-label">Patient Name</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Phone Number</label>
+                    <input type="text" name="phone" class="form-control" placeholder="+91XXXXXXXXXX" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Select Department</label>
+                    <select name="department" class="form-control" required>
+                    <option value="" selected hidden>Choose Department</option>
+                    <option value="General">General</option>
+                    <option value="Dental">Dental</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Cardiology">Cardiology</option>
+
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    Confirm Appointment
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+<footer class="text-center mt-5 text-muted">
+    Real-Time Patient Waiting Optimization System
+</footer>
+
+</body>
+</html>

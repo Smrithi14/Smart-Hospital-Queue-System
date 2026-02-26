@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<!-- Navbar -->
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">🏥 Smart Hospital Queue System</span>
+        <a href="/logout" class="btn btn-light btn-sm">Logout</a>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="container mt-4">
+
+    <!-- ADD THIS HEADING HERE -->
+    <h2 class="fw-bold text-dark mb-4 text-center">🏥 Current Tokens</h2>
+
+    <!-- Department Current Token Cards -->
+    <div class="row mb-4 text-center">
+        {% for dept, token in department_tokens.items() %}
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="text-muted">{{ dept }}</h5>
+                    <h2 class="text-primary fw-bold">{{ token }}</h2>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Buttons -->
+    <div class="text-center mb-3">
+        <form method="POST" class="d-inline">
+            <button class="btn btn-success btn-lg" name="action" value="next">
+                ▶ Call Next Patient
+            </button>
+        </form>
+
+        <form method="POST" class="d-inline">
+            <button class="btn btn-danger btn-lg" name="action" value="reset">
+                🔄 Reset Day
+            </button>
+        </form>
+    </div>
+
+    <!-- Patients Table -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+            Waiting Patients
+        </div>
+
+        <div class="card-body">
+            <table class="table table-hover text-center align-middle">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>Department</th>
+                        <th>Token</th>
+                        <th>Name</th>
+                        <th>Priority</th>
+                        <th>Estimated Wait (min)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for p in patients %}
+                    <tr>
+
+                        <!-- Department -->
+                        <td>
+                            <span class="badge bg-info text-dark">
+                                {{ p.department }}
+                            </span>
+                        </td>
+
+                        <!-- Token -->
+                        <td><strong>{{ p.token }}</strong></td>
+
+                        <!-- Name -->
+                        <td>{{ p.name }}</td>
+
+                        <!-- Priority -->
+                        <td>
+                            {% if p.priority == "Emergency" %}
+                                <span class="badge bg-danger">Emergency</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Normal</span>
+                            {% endif %}
+                        </td>
+
+                        <!-- Estimated -->
+                        <td>{{ p.estimated }}</td>
+
+                        <!-- Actions -->
+                        <td>
+                            <form method="POST" class="d-inline">
+                                <input type="hidden" name="patient_id" value="{{ p.id }}">
+                                <button class="btn btn-sm btn-primary" name="action" value="complete">
+                                    Complete
+                                </button>
+                                <button class="btn btn-sm btn-danger" name="action" value="emergency">
+                                    Emergency
+                                </button>
+                            </form>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<footer class="text-center mt-5 mb-3 text-muted">
+    Smart Queue Management System | Developed for Healthcare Optimization
+</footer>
+
+<script>
+    setTimeout(function(){
+        window.location.reload();
+    }, 5000);
+</script>
+
+</body>
+</html>
