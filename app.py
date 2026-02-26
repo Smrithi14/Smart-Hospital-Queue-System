@@ -386,9 +386,9 @@ scheduler.start()
 # Twilio Configuration
 # ---------------------------
 
-account_sid = "ACe86d6720618ea0c8a488f393f716e04f"
-auth_token = "43b18927d6908d0beaacb8f9c6077e1c"
-twilio_number = "+18382064237"
+account_sid = "ACxx"
+auth_token = "1xxx"
+twilio_number = "123"
 
 # ---------------------------
 # Run App
@@ -396,6 +396,7 @@ twilio_number = "+18382064237"
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=False)
+
 
 
 
